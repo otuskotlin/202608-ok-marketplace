@@ -19,4 +19,5 @@ plugins {
 }
 rootProject.name = "otuskotlin-marketplace-202608"
 
-include("m1l1-first")
+include("m1l1-first", "m1l2-basic")
+
