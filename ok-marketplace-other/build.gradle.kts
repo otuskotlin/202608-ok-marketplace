@@ -38,3 +38,10 @@ tasks {
     }
 
 }
+
+tasks {
+    register("buildInfra") {
+        group = "build"
+        dependsOn(project(":ok-marketplace-dcompose").getTasksByName("publish",false))
+    }
+}

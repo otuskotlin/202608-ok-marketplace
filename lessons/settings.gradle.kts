@@ -1,7 +1,9 @@
 pluginManagement {
     plugins {
         val kotlinVersion: String = providers.gradleProperty("kotlinVersion").get()
+        val kotestVersion: String = providers.gradleProperty("kotestVersion").get()
         kotlin("jvm") version kotlinVersion
+        id("io.kotest") version kotestVersion
     }
 }
 
@@ -26,3 +28,4 @@ include(
     ":m2l6-gradle:sub1:ssub2",
     ":m2l6-gradle:sub2",
 )
+include("m4l3-testing")
