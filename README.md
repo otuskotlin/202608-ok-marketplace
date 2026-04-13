@@ -1,23 +1,51 @@
 # 202608-ok-marketplace
 
-This project uses [Gradle](https://gradle.org/).
-To build and run the application, use the *Gradle* tool window by clicking the Gradle icon in the right-hand toolbar,
-or run it directly from the terminal:
+Учебный проект курса
+[Kotlin Backend Developer](https://otus.ru/lessons/kotlin/).
+Поток курса 2026-08.
 
-* Run `./gradlew run` to build and run the application.
-* Run `./gradlew build` to only build the application.
-* Run `./gradlew check` to run all checks, including tests.
-* Run `./gradlew clean` to clean all build outputs.
+Marketplace -- это площадка, на которой пользователи выставляют предложения и потребности. Задача
+площадки -- предоставить наиболее подходящие варианты в обоих случаях: для предложения -- набор вариантов с
+потребностями, для потребностей -- набор вариантов с предложениями.
 
-Note the usage of the Gradle Wrapper (`./gradlew`).
-This is the suggested way to use Gradle in production projects.
+## Визуальная схема фронтенда
 
-[Learn more about the Gradle Wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html).
+![Макет фронта](imgs/design-layout.png)
 
-[Learn more about Gradle tasks](https://docs.gradle.org/current/userguide/command_line_interface.html#common_tasks).
+## Документация
 
-This project follows the suggested multi-module setup and consists of the `app` and `utils` subprojects.
-The shared build logic was extracted to a convention plugin located in `buildSrc`.
+1. Маркетинг и аналитика
+    1. [Бизнес-документация](./docs/01-biz/README.md)
 
-This project uses a version catalog (see `gradle/libs.versions.toml`) to declare and version dependencies
-and both a build cache and a configuration cache (see `gradle.properties`).
+# Структура проекта
+
+## Подпроекты для занятий по языку Kotlin
+
+1. Модуль 1: Введение в Kotlin
+    1. [m1l1-first](lessons/m1l1-first) - Вводное занятие, создание первой программы на Kotlin
+    2. [m1l2-basic](lessons/m1l2-basic) - Основные конструкции Kotlin
+    3. [m1l3-func](lessons/m1l3-func) - Функциональные элементы Kotlin
+    4. [m1l4-oop](lessons/m1l4-oop) - Объектно-ориентированное программирование
+2. Модуль 2: Расширенные возможности Kotlin
+    1. [m2l1-dsl](lessons/m2l1-dsl) - Предметно ориентированные языки (DSL)
+    2. [m2l2-coroutines](lessons/m2l2-coroutines) - Асинхронное и многопоточное программирование с корутинами
+    3. [m2l3-flows](lessons/m2l3-flows) - Асинхронное и многопоточное программирование с Sequence и Flow
+    4. [m2l4-kmp](lessons/m2l4-kmp) - Мультиплатформенная разработка
+    5. m2l5 - Интероперабельность Kotlin с другими языками
+        1. [m2l5-1-interop](lessons/m2l5-1-interop) - Интероперабельность Kotlin Native с C
+        2. [m2l5-2-jni](lessons/m2l5-2-jni) - Интероперабельность Kotlin JVM с C
+3. Модуль 3: Подготовка к разработке
+
+### Плагины Gradle сборки проекта
+
+1. [build-plugin](build-plugin) Модуль с плагинами
+2. [BuildPluginJvm](build-plugin/src/main/kotlin/BuildPluginJvm.kt) Плагин для сборки проектов JVM
+2. [BuildPluginMultiplarform](build-plugin/src/main/kotlin/BuildPluginMultiplatform.kt) Плагин для сборки
+   мультиплатформенных проектов
+
+## Проектные модули
+
+### Транспортные модели, API
+
+
+
