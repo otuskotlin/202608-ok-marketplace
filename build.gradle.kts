@@ -2,7 +2,7 @@ plugins {
     kotlin("jvm") apply false
 }
 
-group = "ru.otus.otuskotlin"
+group = "ru.otus.otuskotlin.marketplace"
 version = "0.0.1"
 
 repositories {
@@ -10,9 +10,9 @@ repositories {
 }
 
 subprojects {
-    group = rootProject.group
-    version = rootProject.version
     repositories {
         mavenCentral()
     }
+    group = rootProject.group
+    version = rootProject.version
 }

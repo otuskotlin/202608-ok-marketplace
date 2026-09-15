@@ -1,4 +1,5 @@
-.gradle
+/.gradle/
+/.kotlin/
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/*ain/**/build/
@@ -9,6 +10,4 @@ build/
 *.iws
 *.iml
 *.ipr
-
-### Kotlin ###
-.kotlin
+/.gigaide/
