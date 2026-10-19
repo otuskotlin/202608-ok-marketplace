@@ -30,9 +30,9 @@ kotlin {
     //  common - common code that we can use on different platforms
     //  for each target platform, we can specify our own specific dependencies
     sourceSets {
-        val jvmMain by getting {
+        jvmMain {
         }
-        val jvmTest by getting {
+        jvmTest {
             dependencies {
                 implementation(kotlin("test"))
             }
@@ -141,7 +141,7 @@ tasks {
     val javacPath = javaHome.resolve("bin").walk().firstOrNull { it.name.startsWith("javac") }?.absolutePath
         ?: error("javac not found")
 
-    val generateJniHeaders by registering(GenerateJniHeadersTask::class) {
+    val generateJniHeaders = register<GenerateJniHeadersTask>("generateJniHeaders") {
         group = "interop"
         dependsOn("compileKotlinJvm")
 
@@ -153,7 +153,7 @@ tasks {
         tmpDirectory.set(layout.buildDirectory.dir("tmp/jvmJni"))
     }
 
-    val makeCLib by registering(Exec::class) {
+    val makeCLib = register<Exec>("makeCLib") {
         dependsOn(generateJniHeaders)
         group = "build"
         commandLine("make")
