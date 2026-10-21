@@ -1,4 +1,4 @@
-/.gradle/
+**/.gradle/
 /.kotlin/
 build/
 !gradle/wrapper/gradle-wrapper.jar
@@ -7,7 +7,8 @@ build/
 
 ### IntelliJ IDEA ###
 .idea
-*.iws
-*.iml
-*.ipr
+**/*.iws
+**/*.iml
+**/*.ipr
 /.gigaide/
+/kotlin-js-store/
