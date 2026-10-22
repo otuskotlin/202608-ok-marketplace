@@ -8,7 +8,7 @@ dependencyResolutionManagement {
 
 pluginManagement {
     plugins {
-        val kotlinVersion: String by settings
+        val kotlinVersion: String = providers.gradleProperty("kotlinVersion").get()
         kotlin("jvm") version kotlinVersion
     }
 }
