@@ -1,5 +1,3 @@
-import java.net.URL
-
 rootProject.name = "backend-build"
 
 dependencyResolutionManagement {
