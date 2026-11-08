@@ -1,41 +1,33 @@
-# BR-[BR-Number]: [Название фичи]
+# TARGET DIRECTORY: docs/business/BR/
+# TARGET FILENAME: BR-[NNN]-[short_feature_name].md (e.g., BR-001-create-ad.md)
+# NEXT NUMBER: Use sequential NNN from glob(\"docs/business/BR/BR-*.md\" | wc -l +1)
 
-## Статус
-
-| Параметр | Значение |
-|----------|----------|
-| **Статус** | ⬜ Черновик / ✅ Утверждён / ❌ Отклонён |
-| **Дата утверждения** | YYYY-MM-DD |
-| **Комментарий** | [пусто] |
+# BR-[NNN]: [Название фичи]
 
 ## Business Value
-
 [Одна строка: какую проблему решает, какую выгоду приносит]
 
-## User Stories
+## User Scenarios (BDD Style, multiple for each BR for each role)
 
+### BR-[NNN]-U[MMM]
+* **As:** {{Role}}
+* **I want:** {{objective}}
+* **In order to:** {{reason}}
 
-### US-R[BR-Number]-[US-Number]: [Название] {Каждое требование может иметь несколько пользовательских историй}
+#### Acceptance Criteria
 
-* **As a** [Роль]
-* **I want** [Действие]
-* **So that** [Результат]
-
-**Acceptance Criteria:**
-
-* **AC-R[BR-Number]-U[US-Number]-[AC-Number]:** {Каждая пользовательская история может иметь несколько критериев приемки}
-    * **Given:** [Контекст]
-    * **When:** [Действие]
-    * **Then:** [Результат]
+* BR-[NNN]-U[MMM]-C[KKK] - {{comment}}
+  * **Given:** [Контекст/начальное состояние]
+  * **When:** [Действие пользователя или системы]
+  * **Then:** [Ожидаемый результат]
 
 ## System Constraints
 
-| Constraint   | Value     | Notes |
-|--------------|-----------|-------|
-| Latency      | < N ms    |       |
-| Throughput   | N req/sec |       |
-| Availability | N%        |       |
+| Constraint | Value | Notes |
+|-----------|-------|-------|
+| Latency | < N ms | |
+| Throughput | N req/sec | |
+| Availability | N% | |
 
 ## Out of Scope
-
 - [Что НЕ входит в это требование]
