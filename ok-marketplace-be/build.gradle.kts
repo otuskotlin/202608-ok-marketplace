@@ -29,4 +29,19 @@ tasks {
     create("someOtherTask", Task::class) {
         dependsOn(someTask)
     }
+
+    register("buildImages") {
+
+        val isLinuxOS = listOf("linux").any { System.getProperty("os.name").lowercase().contains(it) }
+        logger.lifecycle("isLinuxOS: $isLinuxOS")
+
+
+        dependsOn(project("ok-marketplace-tmp").tasks.getByName("build"))
+
+//        dependsOn(project("ok-marketplace-app-spring").tasks.getByName("dockerBuildJvm"))
+//        dependsOn(project("ok-marketplace-app-ktor").tasks.getByName("dockerBuildJvm"))
+//        dependsOn(project("ok-marketplace-app-ktor").tasks.getByName("dockerBuildLinuxX64"))
+//        dependsOn(project("ok-marketplace-app-rabbit").tasks.getByName("dockerBuildJvm"))
+//        dependsOn(project("ok-marketplace-app-kafka").tasks.getByName("dockerBuildJvm"))
+    }
 }
