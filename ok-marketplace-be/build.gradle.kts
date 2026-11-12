@@ -7,8 +7,19 @@ repositories {
     mavenCentral()
 }
 
-group = "com.otus.otuskotlin.marketplace"
-version = "0.0.1"
+group = "ru.otus.otuskotlin.marketplace"
+version = "0.1.0"
+
+subprojects {
+    group = rootProject.group
+    version = rootProject.version
+    repositories { mavenCentral() }
+}
+
+tasks.named("check") {
+    group = "verification"
+    dependsOn(":ok-marketplace-api-v1-jackson:check", ":ok-marketplace-api-v2-kmp:check")
+}
 
 tasks {
     build {
