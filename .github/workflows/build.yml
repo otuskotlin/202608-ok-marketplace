@@ -52,8 +52,8 @@ jobs:
       - name: Run Tests
         uses: gradle/gradle-build-action@v2
         with:
-          gradle-version: 9.3.1
-          arguments: :ok-marketplace-be:test
+          gradle-version: 9.6.0
+          arguments: :ok-marketplace-be:check
 
       #      # https://github.com/actions/runner-images/issues/675
       #      - name: Hack sources.list

@@ -29,3 +29,5 @@ plugins {
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(":ok-marketplace-tmp")
+include(":ok-marketplace-api-v1-jackson")
+include(":ok-marketplace-api-v2-kmp")
