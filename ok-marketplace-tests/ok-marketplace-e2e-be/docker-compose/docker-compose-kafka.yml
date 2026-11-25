@@ -1,0 +1,43 @@
+services:
+  kafka:
+    image: apache/kafka:latest
+    hostname: kafka
+    ports:
+      - '9092:9092'
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: 'broker,controller'
+      # Четкое разделение: CONTROLLER (29093), INTERNAL (19092) для контейнеров, EXTERNAL (9092) для тебя
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT'
+      KAFKA_LISTENERS: 'CONTROLLER://:29093,INTERNAL://:19092,EXTERNAL://:9092'
+      KAFKA_ADVERTISED_LISTENERS: 'INTERNAL://kafka:19092,EXTERNAL://localhost:9092'
+      KAFKA_INTER_BROKER_LISTENER_NAME: 'INTERNAL'
+      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@kafka:29093'
+      CLUSTER_ID: '4L6g3nShT-eMCtK--X86sw'
+      # Настройки для single-node кластера, чтобы не ругался на нехватку реплик
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_LOG_DIRS: '/tmp/kraft-combined-logs'
+    healthcheck:
+      # Проверяем готовность порта брокера без запуска тяжелой Java-утилиты
+      test: ["CMD-SHELL", "nc -z localhost 19092 || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  app-kafka:
+    image: ok-marketplace-app-kafka:0.0.1
+    environment:
+      # Подключаемся по внутреннему листенеру INTERNAL
+      KAFKA_HOSTS: kafka:19092
+      KAFKA_TOPIC_IN_V1: marketplace-ad-v1-in
+      KAFKA_TOPIC_OUT_V1: marketplace-ad-v1-out
+      KAFKA_TOPIC_IN_V2: marketplace-ad-v2-in
+      KAFKA_TOPIC_OUT_V2: marketplace-ad-v2-out
+    depends_on:
+      kafka:
+        condition: service_healthy
