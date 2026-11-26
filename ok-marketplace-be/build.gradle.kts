@@ -1,43 +1,61 @@
 plugins {
-    alias(libs.plugins.kotlin.jvm) //apply false
+    alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.kotlin.multiplatform) apply false
 }
 
-repositories {
-    mavenCentral()
-}
-
 group = "ru.otus.otuskotlin.marketplace"
-version = "0.1.0"
+version = "0.0.1"
+
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
 
 subprojects {
     group = rootProject.group
     version = rootProject.version
-    repositories { mavenCentral() }
 }
 
-tasks.named("check") {
-    group = "verification"
-    dependsOn(":ok-marketplace-api-v1-jackson:check", ":ok-marketplace-api-v2-kmp:check")
+ext {
+    val specDir = layout.projectDirectory.dir("../specs")
+    set("spec-v1", specDir.file("specs-ad-v1.yaml").toString())
+    set("spec-v2", specDir.file("specs-ad-v2.yaml").toString())
+    set("spec-log1", specDir.file("specs-ad-log1.yaml").toString())
 }
 
 tasks {
-    build {
-        println("this is a build setting")
-        doFirst {
-            println("this a build process")
-        }
-        doLast {
-            println("this is a build post-process")
+    register("build" ) {
+        group = "build"
+    }
+    register("clean" ) {
+        group = "build"
+        subprojects.forEach { proj ->
+            println("PROJ $proj")
+            proj.getTasksByName("clean", false).also {
+                this@register.dependsOn(it)
+            }
         }
     }
-
-    val someTask = create("someTask", Task::class) {
-        dependsOn(build)
-        println("this is a build setting")
+    register("check" ) {
+        group = "verification"
+        subprojects.forEach { proj ->
+            println("PROJ $proj")
+            proj.getTasksByName("check", false).also {
+                this@register.dependsOn(it)
+            }
+        }
     }
+    register("buildImages") {
 
-    create("someOtherTask", Task::class) {
-        dependsOn(someTask)
+        val isLinuxOS = listOf("linux").any { System.getProperty("os.name").lowercase().contains(it) }
+        logger.lifecycle("isLinuxOS: $isLinuxOS")
+
+
+//        dependsOn(project("ok-marketplace-app-spring").tasks.getByName("dockerBuildJvm"))
+//        dependsOn(project("ok-marketplace-app-ktor").tasks.getByName("dockerBuildJvm"))
+//        dependsOn(project("ok-marketplace-app-ktor").tasks.getByName("dockerBuildLinuxX64"))
+//        dependsOn(project("ok-marketplace-app-rabbit").tasks.getByName("dockerBuildJvm"))
+//        dependsOn(project("ok-marketplace-app-kafka").tasks.getByName("dockerBuildJvm"))
     }
 }

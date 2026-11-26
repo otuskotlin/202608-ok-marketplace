@@ -1,0 +1,39 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/v1/ad/offers"
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": {
+      "responseType": "offers",
+      "result": "success",
+      "ad": {
+        "id": "123",
+        "title": "Требуется болт",
+        "description": "Требуется болт 100x5 с шестигранной шляпкой",
+        "adType": "supply",
+        "visibility": "public"
+      },
+      "ads": [
+        {
+          "id": "123",
+          "title": "Some Bolt",
+          "description": "Требуется болт 100x5 с шестигранной шляпкой",
+          "adType": "demand",
+          "visibility": "public"
+        },
+        {
+          "id": "124",
+          "title": "Some Nut",
+          "description": "Требуется болт 100x5 с шестигранной шляпкой",
+          "adType": "demand",
+          "visibility": "public"
+        }
+      ]
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

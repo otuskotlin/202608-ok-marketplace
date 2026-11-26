@@ -1,7 +1,9 @@
 pluginManagement {
     plugins {
         val kotlinVersion: String = providers.gradleProperty("kotlinVersion").get()
+        val kotestVersion: String = providers.gradleProperty("kotestVersion").get()
         kotlin("jvm") version kotlinVersion
+        id("io.kotest") version kotestVersion
     }
 }
 
@@ -18,7 +20,7 @@ include("m2l1-dsl")
 include("m2l2-coroutines")
 include("m2l3-flows")
 include("m2l4-kmp")
-include("m2l5-1-interop")
+include("m2l5-1-interop") //fail on Mac OS
 include("m2l5-2-j")
 include("m2l6-gradle")
 include(
@@ -26,3 +28,4 @@ include(
     ":m2l6-gradle:sub1:ssub2",
     ":m2l6-gradle:sub2",
 )
+include("m4l3-testing")
